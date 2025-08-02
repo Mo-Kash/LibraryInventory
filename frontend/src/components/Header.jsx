@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-function Header({setSelectedCategory, setSelectedItem, setShowAddForm}) {
+function Header({setShowAddForm}) {
   return (
     <Navbar bg="dark" data-bs-theme="dark" variants="dark" expand="lg" className="mb-4 custom-navbar">
       <Container>
@@ -15,19 +15,9 @@ function Header({setSelectedCategory, setSelectedItem, setShowAddForm}) {
           <Nav className="me-auto">
             <Nav.Link 
               href="#"
-              onClick={()=>{
-                setSelectedCategory(null);
-                setSelectedItem(null);
-                setShowAddForm(false);
-              }}
-            >
-              All Items
-            </Nav.Link>
-            <Nav.Link 
-              href="#"
               onClick={()=>setShowAddForm(true)}
             >
-              Add Item
+              + Add Item
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
