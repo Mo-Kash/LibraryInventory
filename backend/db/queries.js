@@ -22,7 +22,7 @@ export const addItem = async (itemData)=>{
 
     const query = `
         INSERT INTO items(name, description, quantity, price, demand_rating, attributes) 
-        VALUES ($1, $2, $3, $4, $5)
+        VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *
     `;
     const result = await pool.query(query, [name, description, quantity, price, demand_rating, JSON.stringify(attributes)]);

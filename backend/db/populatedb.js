@@ -270,7 +270,7 @@ const insertInitData = async()=>{
                 );
             } 
             
-            else if (item.name.includes('GTA')) {
+            else if (item.name.includes('Grand Theft Auto')) {
                 await pool.query(
                     'INSERT INTO item_categories (item_id, category_id) SELECT $1, id FROM categories WHERE name IN ($2)', 
                     [itemId, 'Video Games']

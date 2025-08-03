@@ -12,6 +12,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Filters from './components/Filters';
+import Footer from './components/Footer';
 
 function App() {
   const API_BASE_URL = 'http://localhost:3000/api';
@@ -99,12 +100,26 @@ function App() {
     }
   }
 
+  const handleAddItem = async (itemData)=>{
+    try {
+      const headers = {
+        "Content-Type": "application/json",
+      }
+      const response = await axios.post(`${API_BASE_URL}/items`, itemData, {headers});
+      setItems([...items, response.data]);
+      setShowAddForm(false);
+    } catch (error) {
+      setError('Failed to add item');
+      console.error("Error adding item: ", error);
+    }
+  }
+
   return (
     <div className="App">
       <Header 
         setShowAddForm={setShowAddForm}
       />
-      <Container fluid>
+      <Container fluid className="center">
         <Row>
           <Col md={3}> 
             <Filters 
@@ -116,7 +131,12 @@ function App() {
           <Col md={6}>
             {
               showAddForm?(
-                <AddItemForm />
+                <AddItemForm 
+                  categories={categories}
+                  types={types}
+                  onSubmit={handleAddItem}
+                  onCancel={()=>setShowAddForm(false)}
+                />
               ) : selectedItem ? (
                 <ItemCard 
                   item={selectedItem}
@@ -135,7 +155,8 @@ function App() {
             {/* Additional section for later */}
           </Col>
         </Row>
-    </Container>
+      </Container>
+      <Footer />
     </div>
   )
 }
